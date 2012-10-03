@@ -4,14 +4,14 @@
 var async    = require("async");
 
 var RootEntitlement = {
-	"toString" : function() { return this.id + " : " + this.descriptions['en']; }
+	"toString" : function() { return this.id + ": " + this.description['en']; }
 };
 
-function Entitlement(id,descriptions)
+function Entitlement(id,options)
 {
 	return Object.create(RootEntitlement,{
 		'id' : { value : id },
-		'descritions' : { value: descriptions }
+		'description' : { value: options.description }
 	});
 }
 

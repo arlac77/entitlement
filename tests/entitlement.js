@@ -4,9 +4,12 @@ var vows          = require('vows'),
 
 vows.describe('entitlement').addBatch({
     'cmd': {
-        topic: Entitlement('ent1',{ 'en' : "simple entitlement" }),
+        topic: Entitlement( "ent1", { "description" : { "en" : "simple entitlement" }}),
         'id present': function(entitlement) {
 			assert.equal(entitlement.id, 'ent1');
+        },
+        'toString': function(entitlement) {
+			assert.equal(entitlement.toString(), 'ent1: simple entitlement');
         }
 	}
 }).export(module);
