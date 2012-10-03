@@ -1,0 +1,33 @@
+{
+  "name": "entitlement",
+  "description": "roles rights and entitlements",
+  "version": "0.0.1",
+  "private": false,
+  "keywords": [
+    "entitlements",
+    "roles",
+    "rights"
+  ],
+  "engines": {
+    "node": ">=0.8"
+  },
+  "author": {
+    "name": "Markus Felten",
+    "email": "Markus.Felten@gmx.de"
+  },
+  "dependencies": {
+    "async": ">=0.1.15",
+    "pkginfo": ">=0.2.3"
+  },
+  "devDependencies": {
+    "vows": ">=0.6"
+  },
+  "main": "entitlement.js",
+  "scripts": {
+    "test": "vows tests/*.js --isolate --spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:arlac77/entitlement.git"
+  }
+}
