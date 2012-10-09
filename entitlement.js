@@ -3,6 +3,8 @@
 
 var async    = require("async");
 
+var _entitlements = {};
+var _roles = {};
 
 var RootEntitlement = {
 	"toString" : function() { return this.description ? this.id + ": " + this.description['en'] : this.id; }
@@ -22,17 +24,19 @@ function Entitlement(id,options)
 	return Object.create(RootEntitlement, defs);
 }
 
-var _entitlements = {};
 
-function registerEntitlements(ents)
+exports.registerEntitlements = function(ents)
 {
 	for(var i in ents) {
 		_entitlements[i] = Entitlement(i, ents[i]);
 	}
 }
 
-function getEntitlement(id) {
-	return _entitlements[id];
+exports.registerRoles = function(roles)
+{
+	for(var i in roles) {
+		_roles[i] = Role(i, roles[i]);
+	}
 }
 
 var RootRole = {
@@ -58,6 +62,4 @@ function Role(id,rights)
 }
 
 exports.Entitlement   = Entitlement;
-exports.registerEntitlements  = registerEntitlements;
-exports.getEntitlement  = getEntitlement;
 exports.Role          = Role;
