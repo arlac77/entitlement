@@ -5,7 +5,7 @@ var async    = require("async");
 
 
 var RootEntitlement = {
-	"toString" : function() { return this.id + ": " + this.description['en']; }
+	"toString" : function() { return this.description ? this.id + ": " + this.description['en'] : this.id; }
 };
 
 function Entitlement(id,options)
