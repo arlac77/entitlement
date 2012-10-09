@@ -24,24 +24,40 @@ function Entitlement(id,options)
 
 var _entitlements = {};
 
-function Entitlements(ents)
+function registerEntitlements(ents)
 {
 	for(var i in ents) {
 		_entitlements[i] = Entitlement(i, ents[i]);
 	}
 }
 
-function Role(id,descriptions)
-{
-	
+function getEntitlement(id) {
+	return _entitlements[id];
 }
 
-function Roles(roles)
+var RootRole = {
+	"toString" : function() { return this.id + ': ' + Object.keys(this.rights).join(','); },
+	"hasEntitlement" : function(ent) { return this.rights[ent]; }
+};
+
+function Role(id,rights)
 {
-	
+	var rs = {};
+
+	for(var i in rights) {
+		var e = rights[i];
+		rs[e] = _entitlements[e];
+		if(!rs[e]) rs[e] = Entitlement(e);
+	}
+
+	var defs = {
+		id: { value: id, enumerable: true },
+	    rights: { value: rs, enumerable: true }};
+
+	return Object.create(RootRole, defs);
 }
 
 exports.Entitlement   = Entitlement;
-exports.Entitlements  = Entitlements;
+exports.registerEntitlements  = registerEntitlements;
+exports.getEntitlement  = getEntitlement;
 exports.Role          = Role;
-exports.Roles         = Roles;

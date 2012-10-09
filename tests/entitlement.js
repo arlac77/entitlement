@@ -1,6 +1,7 @@
 var vows          = require('vows'),
 	assert        = require('assert'),
-    Entitlement   = require('../entitlement').Entitlement;
+    Entitlement   = require('../entitlement').Entitlement,
+    Role          = require('../entitlement').Role;
 
 vows.describe('entitlement').addBatch({
     'declare single with description': {
@@ -19,6 +20,15 @@ vows.describe('entitlement').addBatch({
         },
         'toString': function(entitlement) {
 			assert.equal(entitlement.toString(), 'ent1');
+        }
+	},
+    'declare role': {
+        topic: Role('role1',['ent1']),
+        'id present': function(entitlement) {
+			assert.equal(entitlement.id, 'role1');
+        },
+        'toString': function(entitlement) {
+			assert.equal(entitlement.toString(), 'role1: ent1');
         }
 	}
 }).export(module);
