@@ -51,12 +51,12 @@ var RootAccount = {
 	"toString" : function() { return this.id + ': ' + Object.keys(this.roles).join(','); }
 };
 
-function Account(id,roles)
+function Account(id,options)
 {
 	var rs = {};
 
-	for(var i in roles) {
-		var e = roles[i];
+	for(var i in options.roles) {
+		var e = options.roles[i];
 		rs[e] = _roles[e];
 		if(!rs[e]) rs[e] = Role(e);
 	}
@@ -89,6 +89,10 @@ exports.registerAccounts = function(accounts)
 	}
 }
 
+exports.accountHasEntitlement = function(account,entitlement)
+{
+	return true;
+}
 
 exports.Entitlement   = Entitlement;
 exports.Role          = Role;

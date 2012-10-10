@@ -33,12 +33,12 @@ vows.describe('entitlement').addBatch({
         }
 	},
     'declare account': {
-        topic: Account('acc1',['role1']),
+        topic: Account('acc1',{roles:['role1','role2']}),
         'id present': function(account) {
 			assert.equal(account.id, 'acc1');
         },
         'toString': function(entitlement) {
-			assert.equal(entitlement.toString(), 'acc1: role1');
+			assert.equal(entitlement.toString(), 'acc1: role1,role2');
         }
 	}
 }).export(module);
