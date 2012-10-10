@@ -49,7 +49,7 @@ function Role(id,rights)
 
 var RootAccount = {
 	"toString" : function() { return this.id + ': ' + Object.keys(this.roles).join(','); },
-	"hasEntitlement" : function(entlement) { return false; }
+	"hasEntitlement" : function(entitlement) { return true; }
 };
 
 function Account(id,options)
@@ -93,6 +93,7 @@ exports.registerAccounts = function(accounts)
 exports.accountHasEntitlement = function(account,entitlement)
 {
 	var a = _accounts[account];
+	//console.log("a: " + account + " -> " + a);
 	return a && a.hasEntitlement(entitlement) ? true : false;
 }
 

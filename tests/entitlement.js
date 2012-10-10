@@ -3,7 +3,8 @@ var vows          = require('vows'),
     Entitlement   = require('../entitlement').Entitlement,
     Role          = require('../entitlement').Role,
     Account       = require('../entitlement').Account,
-    accountHasEntitlement       = require('../entitlement').accountHasEntitlement;
+    accountHasEntitlement	= require('../entitlement').accountHasEntitlement,
+    registerAccounts		= require('../entitlement').registerAccounts;
 
 vows.describe('entitlement').addBatch({
     'declare single with description': {
@@ -47,7 +48,15 @@ vows.describe('entitlement').addBatch({
         'entitlement not present': function(flag) {
 			assert.isFalse(flag);
         }
+	},
+    'entitlement of known account': {
+        topic: function() {
+			registerAccounts({'acc1' :{roles:['role1','role2']}})
+			return accountHasEntitlement("acc1","role1")
+		},
+        'entitlement is present': function(flag) {
+			assert.isTrue(flag);
+        }
 	}
-
 }).export(module);
 
