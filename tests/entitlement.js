@@ -2,7 +2,8 @@ var vows          = require('vows'),
 	assert        = require('assert'),
     Entitlement   = require('../entitlement').Entitlement,
     Role          = require('../entitlement').Role,
-    Account       = require('../entitlement').Account;
+    Account       = require('../entitlement').Account,
+    accountHasEntitlement       = require('../entitlement').accountHasEntitlement;
 
 vows.describe('entitlement').addBatch({
     'declare single with description': {
@@ -40,6 +41,13 @@ vows.describe('entitlement').addBatch({
         'toString': function(entitlement) {
 			assert.equal(entitlement.toString(), 'acc1: role1,role2');
         }
+	},
+    'entitlement of unknown account': {
+        topic: accountHasEntitlement("someone","somethine"),
+        'entitlement not present': function(flag) {
+			assert.isFalse(flag);
+        }
 	}
+
 }).export(module);
 
