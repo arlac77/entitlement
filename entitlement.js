@@ -5,6 +5,7 @@ var async    = require("async");
 
 var _entitlements = {};
 var _roles = {};
+var _accounts = {};
 
 var RootEntitlement = {
 	"toString" : function() { return this.description ? this.id + ": " + this.description['en'] : this.id; }
@@ -22,21 +23,6 @@ function Entitlement(id,options)
 	}
 
 	return Object.create(RootEntitlement, defs);
-}
-
-
-exports.registerEntitlements = function(ents)
-{
-	for(var i in ents) {
-		_entitlements[i] = Entitlement(i, ents[i]);
-	}
-}
-
-exports.registerRoles = function(roles)
-{
-	for(var i in roles) {
-		_roles[i] = Role(i, roles[i]);
-	}
 }
 
 var RootRole = {
@@ -61,5 +47,49 @@ function Role(id,rights)
 	return Object.create(RootRole, defs);
 }
 
+var RootAccount = {
+	"toString" : function() { return this.id + ': ' + Object.keys(this.roles).join(','); }
+};
+
+function Account(id,roles)
+{
+	var rs = {};
+
+	for(var i in roles) {
+		var e = roles[i];
+		rs[e] = _roles[e];
+		if(!rs[e]) rs[e] = Role(e);
+	}
+
+	var defs = {
+		id: { value: id, enumerable: true },
+	    roles: { value: rs, enumerable: true }};
+
+	return Object.create(RootAccount, defs);
+}
+
+exports.registerEntitlements = function(ents)
+{
+	for(var i in ents) {
+		_entitlements[i] = Entitlement(i, ents[i]);
+	}
+}
+
+exports.registerRoles = function(roles)
+{
+	for(var i in roles) {
+		_roles[i] = Role(i, roles[i]);
+	}
+}
+
+exports.registerAccounts = function(accounts)
+{
+	for(var i in accounts) {
+		_accounts[i] = Account(i, accounts[i]);
+	}
+}
+
+
 exports.Entitlement   = Entitlement;
 exports.Role          = Role;
+exports.Account       = Account;
