@@ -1,12 +1,13 @@
 {
   "name": "entitlement",
-  "description": "roles rights and entitlements",
-  "version": "0.0.1",
+  "description": "accounts, roles and entitlements",
+  "version": "0.1.0",
   "private": false,
   "keywords": [
     "entitlements",
     "roles",
-    "rights"
+    "rights",
+	"account"
   ],
   "engines": {
     "node": ">=0.8"
@@ -16,8 +17,6 @@
     "email": "Markus.Felten@gmx.de"
   },
   "dependencies": {
-    "async": ">=0.1.15",
-    "pkginfo": ">=0.2.3"
   },
   "devDependencies": {
     "vows": ">=0.6"
