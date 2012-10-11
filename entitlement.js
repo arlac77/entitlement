@@ -1,8 +1,6 @@
 
 "use strict";
 
-var async    = require("async");
-
 var _entitlements = {};
 var _roles = {};
 var _accounts = {};
