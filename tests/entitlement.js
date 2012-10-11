@@ -53,11 +53,14 @@ vows.describe('entitlement').addBatch({
     'entitlement of known account': {
         topic: function() {
 			registerRoles({'role1' : ['ent1']})
-			registerAccounts({'acc1' : { roles : ['role1','role2']}})
-			return accountHasEntitlement("acc1","ent1")
+			registerAccounts({'acc1' : { roles : ['role1']}})
+			return true;
 		},
         'entitlement is present': function(flag) {
-			assert.isTrue(flag);
+			assert.isTrue(accountHasEntitlement("acc1","ent1"));
+        },
+        'entitlement not present': function(flag) {
+			assert.isFalse(accountHasEntitlement("acc1","ent2"));
         }
 	}
 }).export(module);

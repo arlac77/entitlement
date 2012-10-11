@@ -8,7 +8,8 @@ var _roles = {};
 var _accounts = {};
 
 var RootEntitlement = {
-	"toString" : function() { return this.description ? this.id + ": " + this.description['en'] : this.id; }
+	"toString" : function() { return this.description ? this.id + ": " + this.description['en'] : this.id; },
+	"hasEntitlement" : function(ent) { return this === ent; }
 };
 
 function Entitlement(id,options)
@@ -101,7 +102,7 @@ exports.accountHasEntitlement = function(account,entitlement)
 {
 	var e = _entitlements[entitlement];
 	var a = _accounts[account];
-	console.log("a: " + account + " -> " + a + " " + e);
+	console.log("accountHasEntitlement: " + a + "," + e + " -> " + (a && a.hasEntitlement(e) ? true : false));
 	return a && a.hasEntitlement(e) ? true : false;
 }
 
