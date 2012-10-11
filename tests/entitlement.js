@@ -4,6 +4,7 @@ var vows          = require('vows'),
     Role          = require('../entitlement').Role,
     Account       = require('../entitlement').Account,
     accountHasEntitlement	= require('../entitlement').accountHasEntitlement,
+    registerRoles			= require('../entitlement').registerRoles,
     registerAccounts		= require('../entitlement').registerAccounts;
 
 vows.describe('entitlement').addBatch({
@@ -51,8 +52,9 @@ vows.describe('entitlement').addBatch({
 	},
     'entitlement of known account': {
         topic: function() {
-			registerAccounts({'acc1' :{roles:['role1','role2']}})
-			return accountHasEntitlement("acc1","role1")
+			registerRoles({'role1' : ['ent1']})
+			registerAccounts({'acc1' : { roles : ['role1','role2']}})
+			return accountHasEntitlement("acc1","ent1")
 		},
         'entitlement is present': function(flag) {
 			assert.isTrue(flag);

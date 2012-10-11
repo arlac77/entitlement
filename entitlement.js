@@ -37,7 +37,7 @@ function Role(id,rights)
 	for(var i in rights) {
 		var e = rights[i];
 		rs[e] = _entitlements[e];
-		if(!rs[e]) rs[e] = Entitlement(e);
+		if(!rs[e]) rs[e] = _entitlements[e] = Entitlement(e);
 	}
 
 	var defs = {
@@ -49,7 +49,13 @@ function Role(id,rights)
 
 var RootAccount = {
 	"toString" : function() { return this.id + ': ' + Object.keys(this.roles).join(','); },
-	"hasEntitlement" : function(entitlement) { return true; }
+	"hasEntitlement" : function(entitlement) {
+		for(var i in this.roles) {
+			if(this.roles[i].hasEntitlement(entitlement))
+				return true;
+		}
+		return false;
+	}
 };
 
 function Account(id,options)
@@ -59,7 +65,7 @@ function Account(id,options)
 	for(var i in options.roles) {
 		var e = options.roles[i];
 		rs[e] = _roles[e];
-		if(!rs[e]) rs[e] = Role(e);
+		if(!rs[e]) rs[e] = _roles[e] = Role(e);
 	}
 
 	var defs = {
@@ -79,6 +85,7 @@ exports.registerEntitlements = function(ents)
 exports.registerRoles = function(roles)
 {
 	for(var i in roles) {
+		//console.log("registerRoles: " + i + " " + JSON.stringify(roles[i]));
 		_roles[i] = Role(i, roles[i]);
 	}
 }
@@ -92,9 +99,10 @@ exports.registerAccounts = function(accounts)
 
 exports.accountHasEntitlement = function(account,entitlement)
 {
+	var e = _entitlements[entitlement];
 	var a = _accounts[account];
-	//console.log("a: " + account + " -> " + a);
-	return a && a.hasEntitlement(entitlement) ? true : false;
+	console.log("a: " + account + " -> " + a + " " + e);
+	return a && a.hasEntitlement(e) ? true : false;
 }
 
 exports.Entitlement   = Entitlement;
