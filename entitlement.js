@@ -102,7 +102,7 @@ exports.accountHasEntitlement = function(account,entitlement)
 {
 	var e = _entitlements[entitlement];
 	var a = _accounts[account];
-	console.log("accountHasEntitlement: " + a + "," + e + " -> " + (a && a.hasEntitlement(e) ? true : false));
+	//console.log("accountHasEntitlement: " + a + "," + e + " -> " + (a && a.hasEntitlement(e) ? true : false));
 	return a && a.hasEntitlement(e) ? true : false;
 }
 
