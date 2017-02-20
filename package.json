@@ -19,7 +19,7 @@
   "dependencies": {
   },
   "devDependencies": {
-    "vows": ">=0.6"
+    "vows": ">=0.8.1"
   },
   "main": "entitlement.js",
   "scripts": {
