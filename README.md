@@ -1,6 +1,8 @@
 entitlement(1) -- abstractions around roles rights and entitlements
 ==============================
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/arlac77/entitlement.svg)](https://greenkeeper.io/)
+
 [![Build Status](https://secure.travis-ci.org/arlac77/entitlement.png)](http://travis-ci.org/arlac77/entitlement)
 
 
