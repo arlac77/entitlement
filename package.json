@@ -7,7 +7,7 @@
     "entitlements",
     "roles",
     "rights",
-	"account"
+    "account"
   ],
   "engines": {
     "node": ">=0.8"
@@ -16,8 +16,7 @@
     "name": "Markus Felten",
     "email": "Markus.Felten@gmx.de"
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "vows": ">=0.6"
   },
